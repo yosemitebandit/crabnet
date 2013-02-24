@@ -141,6 +141,15 @@
           .linkDistance(30)
           .size([width, height]);
 
+
+      setTimeout(function perturb() {
+        var bump = Math.random()/2;
+        force.alpha(bump);
+        var millis = Math.random()*800 + 800
+        setTimeout(perturb, millis);
+      }, 2000);
+
+
       var svg = d3.select("#network-graph").append("svg")
           .attr("width", width)
           .attr("height", height);
