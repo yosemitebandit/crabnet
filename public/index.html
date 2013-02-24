@@ -127,14 +127,17 @@
 
 
     <script src="http://d3js.org/d3.v3.min.js"></script>
+    <script src="js/jquery.min.js"></script>
     <script>
-      var width = 250;
-      var height = 300;
+
+      var width = $('#network-graph').width();
+      var height = 2*width - 0.5*width;
 
       var color = d3.scale.category20();
 
       var force = d3.layout.force()
           .charge(-120)
+          .gravity(0.09)
           .linkDistance(30)
           .size([width, height]);
 
