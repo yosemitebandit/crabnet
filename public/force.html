@@ -44,25 +44,25 @@
         var w = 1280,
         h = 900,
         fill = d3.scale.category10(),
-        nodes = d3.range(1000).map(Object),
-        links = d3.range(1000).map(Object);
+        nodes = d3.range(response.length).map(Object),
+        links = d3.range(response.length).map(Object);
 
         var index = 0;
         var mouseX = 0,
           mouseY = 0;
 
-          console.log(response)
-
-        for (var j = 0; j < response.length-2; j++){
-          console.log(j + ' author A ' + response[j].authorA + ' author B ' + response[j].authorB + ' value ' + response[j].paperCount);
-          //links[j] = {source: nodes[response[j].authorA], target: nodes[response[j].authorB], value: response[j].paperCount};
+        for (var j = 0; j < response.length; j++){
+          //console.log(j + ' author A ' + response[j].authorA + ' author B ' + response[j].authorB + ' value ' + response[j].paperCount);
+          links[j] = {source: nodes[response[j].authorA], target: nodes[response[j].authorB], value: response[j].paperCount};
         }
 
-      /*links.forEach(function(o,i){
+      /*
+      links.forEach(function(o,i){
         o.source = nodes[(Math.round(Math.random()*99))];
         o.target = nodes[(Math.round(Math.random()*99))];
         o.value = (Math.round(Math.random()*10));
-      });*/
+      });
+      */
 
       var vis = d3.select("#container").append("svg:svg")
           .attr("width", w)
