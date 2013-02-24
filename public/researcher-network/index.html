@@ -1,49 +1,100 @@
-<html>
-    <head>
-        <title>D3 Test</title>
-        <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
-        <script type="text/javascript" src="http://d3js.org/d3.v3.min.js"></script>
-      <style>
-        #hover-info {
-          position: relative;
-          height: auto;
-          width:100%;
-          border-top: 1px solid black;
-          border-bottom: 1px solid black;
-          vertical-align:middle;
-        }
-        #container {
-          padding-left:15%;
-          padding-right:15%;
-        }
-        #more-info-box {
-          position:absolute;
-          background-color:white;
-          border: 1px solid;
-          height:50px;
-          width:200px;
-        }
-      </style>
-    </head>
-    <body>
-      <div id='container'>
-        <h2>Do not wait to strike till the iron is hot; but make it hot by striking.</h2>
-        <div class='row'>
-             <button id='clear-box'>Clear</button>         
-          </div>
-          <div class='row contain-graphic'>
-            <div id='more-info-box'></div>
-          </div>
-          <div id="hover-info">
-        </div>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="author" content="Will, Stephanie, Hillary, Fokale, Patrick, Jas, Matt" />
+    <meta name="keywords" content="clinical trials, participants, registration" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="icon" type="image/gif" href="favicon.gif" />
+    <link href="../css/bootstrap.css" rel="stylesheet">
+    <link href="../css/bootstrap-responsive.css" rel="stylesheet">
+
+    <title>Target Accrual - Researcher Network</title>
+
+    <style>
+      #hover-info {
+        position: relative;
+        height: auto;
+        width:100%;
+        border-top: 1px solid black;
+        border-bottom: 1px solid black;
+        vertical-align:middle;
+      }
+      #container {
+        padding-left:15%;
+        padding-right:15%;
+      }
+      #more-info-box {
+        position:absolute;
+        background-color:white;
+        border: 1px solid;
+        height:50px;
+        width:200px;
+      }
+
+      #header {
+        margin-left: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <!--
+    <div id='container'>
+      <h2>Do not wait to strike till the iron is hot; but make it hot by striking.</h2>
+      <div class='row'>
+        <button id='clear-box'>Clear</button>         
+      </div>
+      <div class='row contain-graphic'>
+        <div id='more-info-box'></div>
+      </div>
+      <div id="hover-info">
+      </div>
+
+    </div>
+    -->
+
+
+    <div class='row'>
+      <div class='span12'>
+        <h4 id='header'><a href="/">Target Accrual</a>
+          <small>researcher network</small>
+        </h4>
+      </div>
+    </div>
+
+    <div class='row'>
+      <div class='span10 contain-graphic'>
+      </div>
+
+      <div class='span2'>
+        <h5>Legend</h5>
+        <ul>
+          <li>nodes: authors</li>
+          <li>lines: co-authorship</li>
+        </ul>
+
+        <br />
+
+        <h5>Methods</h5>
+        <p>Papers are extracted via PubMed searches on certain keywords
+        and parsed for author information.  Scraper source code is available
+        <a href="https://github.com/yosemitebandit/crabnet">on GitHub</a>.</p>
 
       </div>
-    </body>
+
+    </div>
+
+  </body>
+
+  <script src="../js/jquery.min.js"></script>
+  <script type="text/javascript" src="../js/d3.v3.min.js"></script>
+
     <script type="text/javascript">
     $(document).ready(function(){
       $.getJSON('../network-data/chordoma.txt', function(response){
-        var w = 1280,
-        h = 900,
+        var w = $('.contain-graphic').width(),
+        h = $(window).height()-50,
         fill = d3.scale.category10(),
         nodes = d3.range(response.authorsOnly.length).map(Object),
         links = d3.range(response.authorPairs.length).map(Object);
