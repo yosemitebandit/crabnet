@@ -162,16 +162,18 @@ len_authors = len(list_auth)
 authorsOnly = []
 for h in range(len_authors):
     jsonAuth = {
-            'author':h,
+            'author_id':h,
+            'author_name':list_auth[h],
             'papers':list_papersAuth[h]
             }
     #print jsonAuth
     authorsOnly.append(jsonAuth)
-
+    
     
 libAuth = {}
-libAuth['libraries'] = authorPairs
-libAuth['authors'] = authorsOnly    
+libAuth['authorPairs'] = authorPairs
+libAuth['authorsOnly'] = authorsOnly
+
 with open('papers.txt', 'wa') as outfile:
     json.dump(libAuth, outfile)
 
