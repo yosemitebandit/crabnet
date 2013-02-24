@@ -2,7 +2,6 @@
 <html lang="en">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <meta charset="UTF-8" />
     <meta name="author" content="Will, Stephanie, Hillary, Fokale, Patrick, Jas, Matt" />
     <meta name="keywords" content="clinical trials, participants, registration" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -25,6 +24,14 @@
         stroke-opacity: 0.6;
       }
 
+      section {
+        margin-bottom: 30px;
+      }
+
+      .label-regal {
+        background-color: #C45AAC;
+      }
+
     </style>
 
 
@@ -38,56 +45,107 @@
 
       <div class="span8">
         <h1>Target Accrual
-          <small>improving clinical trial recruitment</small>
+          <small>modern recruitment for clinical trials</small>
         </h1>
 
         <ul class='nav nav-pills'>
-          <li class='active'><a href="#">home</a></li>
-          <li><a href="#about">about</a></li>
+          <li class='active'><a href="#about">about</a></li>
           <li><a href="#methods">methods</a></li>
           <li><a href="#team">team</a></li>
-          <li><a href="research-network">research network</a></li>
+          <li><a href="researcher-network">researcher network</a></li>
         </ul>
 
-        <div id='about'>
+        <section id='about'>
           <h4>about</h4>
-          <p>30% of clinical trials <strong>fail</strong> to reach recruitment targets.</p>
-          <p>Treatment development costs $1B USD per year.</p>
-          <p>18% of participants in clinical trials do not know about clinicaltrials.gov</p>
-        </div>
-
-        <div id='methods'>
-          <h4>methods</h4>
-          <p>we use facebook and google ads, 
-          an advanced always up-to-date research network,
-          algorithms for tracking patient forums
-          and a new ad network for recruiting
-          to find more participants for trials.</p>
-        </div>
-
-
-        <div id='team'>
-          <h4>team</h4>
-          <p>Patrick Ye - Duke BSE, Stanford Masters of Medicine, future Stanford PhD</p>
-          <p>Stephanie Chang - Duke BSE, Microsoft Ad networks</p>
-          <p>Will Patrick - Duke BSE, Google, future MIT PhD</p>
-          <p>Hillary Lin - Stanford, Stanford Med Oncology Dept</p>
-          <p>Folake Dosu - Stanford, healthcare tech startup</p>
-          <p>Jasdeep Garcha - Duke BSE, Microsoft Kernel team</p>
-          <p>Matt Ball - Duke BSE</p>
-        </div>
-
-
-        <div id='research-network'>
-          <h4>research network</h4>
-          <p>we have developed an advanced, open-source research network for 
-          determining co-authorship and helping to find cutting edge researchers
+          <p>Clinicians and Pharmaceutical companies need <strong>new methodologies</strong>
+          for finding eligible candidates for clinical trials.
           </p>
-        </div>
+          <p>48% of clinical trials <strong>fail</strong> to reach recruitment targets.</p>
+          <p>Treatment development costs $1B USD per year.</p>
+          <p>Only 18% of participants in clinical trials found their options online.</p>
+        </section>
+
+        <section id='methods'>
+          <h4>methods</h4>
+          <p>We employ a diverse set of strategies to inform potential candidates 
+          about clinical trials for which they may be eligible:</p>
+
+          <ul>
+            <li>We manage targeted Facebook and Google ad campaigns to rapidly seek out
+            candidates.</li>
+            <li>Our researcher network informs us of patients seeking trials and is 
+            kept constantly up-to-date via our open source data-mining algorithms.</li>
+            <li>A custom recruitment panel is available for embedding in advocacy 
+            websites and patient forums to keep patients informed.</li>
+          </ul>
+        </section>
+
+
+        <section id='team'>
+          <h4>team</h4>
+          <p>
+          Patrick Ye
+          &mdash;
+          <span class='label label-important'>PhD candidate, Masters of Medicine, Stanford</span>
+          <span class='label label-info'>Duke BSE</span>
+          </p>
+
+          <p>
+          <a href='http://www.stchangg.com'>Stephanie Chang</a>
+          &mdash;
+          <span class='label label-regal'>developer, Khan Academy</span>
+          <span class='label label-info'>program manager, Microsoft Ads</span>
+          <span class='label label-info'>Duke BSE</span>
+          </p>
+
+          <p>
+          <a href='http://iamwillpatrick.com'>Will Patrick</a>
+          &mdash;
+          <span class='label label-regal'>prototyper, Google X</span>
+          <span class='label label-info'>Duke BSE</span>
+          </p>
+
+          <p>
+          Hillary Lin
+          &mdash;
+          <span class='label label-important'>MD candidate, Stanford Oncology</span>
+          </p>
+
+          <p>
+          Folake Desu
+          &mdash;
+          <span class='label label-regal'>health startup strategist</span>
+          <span class='label label-important'>Stanford</span>
+          </p>
+
+          <p>
+          <a href='http://www.iamjasdeep.com'>Jasdeep Garcha</a>
+          &mdash;
+          <span class='label label-regal'>developer, Lolli and Pops</span>
+          <span class='label label-info'>program manager, Microsoft kernel</span>
+          <span class='label label-info'>Duke BSE</span>
+          </p>
+
+          <p>
+          <a href='http://yosemitebandit.com'>Matt Ball</a>
+          &mdash;
+          <span class='label label-regal'>freelance developer</span>
+          <span class='label label-info'>Duke BSE</span>
+          </p>
+        </section>
+
+
+        <section id='researcher-network'>
+          <h4>researcher network</h4>
+          <p>we have developed an open-source researcher network for 
+          identifying common collaborators and research silos.</p>
+          </p>
+        </section>
 
       </div>
 
     </div>
+
 
     <script src="http://d3js.org/d3.v3.min.js"></script>
     <script>
