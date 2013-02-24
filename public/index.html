@@ -2,7 +2,6 @@
 <html lang="en">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <meta charset="UTF-8" />
     <meta name="author" content="Will, Stephanie, Hillary, Fokale, Patrick, Jas, Matt" />
     <meta name="keywords" content="clinical trials, participants, registration" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -25,48 +24,206 @@
         stroke-opacity: 0.6;
       }
 
+      section {
+        padding-top: 5px;
+        margin-bottom: 20px;
+      }
+
+      .label-regal {
+        background-color: #C45AAC;
+      }
+
+      body {
+        color: #445566;
+        background-color: #fdfdfd;
+      }
+
+      #ad-network h5 {
+        margin-top: 0;
+      }
+
+      /* kludgy protection of the sample ad
+      */
+      h5, p {
+        text-decoration: none;
+        color: #445566;
+      }
+
+      .header {
+        background: #EEE;
+      }
+
+      .header-inner {
+        margin-top: 20px;
+      }
+
+      .nav {
+        margin-top: 25px;
+        margin-bottom: 10px;
+      }
+
+      .content {
+        margin-top: 20px;
+      }
+
     </style>
 
 
   </head>
 
   <body>
-    <div class="row">
+    <div class="row header">
+      <div class="span8 offset4 header-inner">
+        <h1>Target Accrual
+          <small>modern recruitment for clinical trials</small>
+        </h1>
+
+        <ul class='nav nav-pills'>
+          <li class='active'><a href="#about">about</a></li>
+          <li><a href="#methods">methods</a></li>
+          <li><a href="#team">team</a></li>
+          <li><a href="#ad-network">ad network</a></li>
+          <li><a href="#researcher-network">researcher network</a></li>
+          <li><a href="#open-source">open source</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="row content">
       <div class="span4" id="network-graph">
         <!-- standalone network graph -->
       </div>
 
       <div class="span8">
-        <h1>Target Accrual
-          <small>improving clinical trial recruitment</small>
-        </h1>
+        <section id='about'>
+          <h4>About</h4>
+          <p>Clinicians and pharmaceutical companies need new methodologies
+          to find eligible candidates for clinical trials.
+          Target Accrual works to <strong>increase enrollment</strong> via a <strong>custom ad network</strong>.
+          </p>
 
-        <ul class='nav nav-pills'>
-          <li class='active'><a href="#">home</a></li>
-          <li><a href="#">methods</a></li>
-          <li><a href="#">about</a></li>
-          <li><a href="#">team</a></li>
-          <li><a href="#">research network</a></li>
-        </ul>
+          <p>Medical advancements depend on the successful completion of
+          clinical trials but <strong>48% fail</strong>
+          <p>48% of clinical trials <strong>fail</strong> to reach recruitment targets.</p>
+          <p>Treatment development costs $1B USD per year.</p>
+          <p>$8M is lost each day a clinical trial is delayed.</p>
+          <p>Only 18% of participants in clinical trials found their options online.</p>
+        </section>
 
-        <p>30% of clinical trials <strong>fail</strong> to reach recruitment targets.</p>
-        <p>Treatment development costs $1B USD per year.</p>
-        <p>18% of participants in clinical trials do not know about clinicaltrials.gov</p>
+        <section id='methods'>
+          <h4>Methods</h4>
+          <p>We employ a diverse set of strategies to inform potential candidates 
+          about clinical trials for which they may be eligible:</p>
+
+          <ul>
+            <li>We manage targeted Facebook and Google ad campaigns to rapidly seek out
+            candidates.</li>
+            <li>Our researcher network informs us of patients seeking trials and is 
+            kept constantly up-to-date via our open source data-mining algorithms.</li>
+            <li>A custom recruitment panel is available for embedding in advocacy 
+            websites and patient forums to keep patients informed.</li>
+          </ul>
+        </section>
+
+
+        <section id='team'>
+          <h4>Team</h4>
+          <p>Our group members hail from a diverse set of backgrounds, including Stanford Medicine,
+          Duke Biomedical Engineering, Google X and the Microsoft Display Ads team.
+          We connected at the <a href="http://startxmed.com">StartX-Med</a> 2013 hackathon.
+          </p>
+
+          <ul>
+            <li>Patrick Ye</li>
+            <li><a href='http://www.stchangg.com'>Stephanie Chang</a></li>
+            <li><a href='http://iamwillpatrick.com'>Will Patrick</a></li>
+            <li>Hillary Lin</li>
+            <li>Folake Desu</li>
+            <li><a href='http://www.iamjasdeep.com'>Jasdeep Garcha</a></li>
+            <li><a href='http://yosemitebandit.com'>Matt Ball</a></li>
+          </ul>
+
+          <p>To get in touch, please email Hillary Lin &mdash; 
+          <a href='#'>hillarylin@stanford.edu</a>.</p>
+
+        </section>
+
+
+        <section id='ad-network'>
+          <h4>Ad network</h4>
+          <p>Patient forums and other medical sites can use our custom display ads
+          to put clinical trial information in front of people who need to know.
+          </p>
+
+          <a href='#ad-modal' data-toggle='modal'>
+            <div class='well span3'>
+              <h5>Chordoma Clinical Trial</h5>
+              <p>Opening May 5th, we are seeking males and females over 18.</p>
+              <p>Click to find out more.</p>
+              <span class='label pull-right label-info'>Duke University</span>
+            </div>
+          </a>
+
+        </section>
+
+        <div class='clearfix'></div>
+
+        <div class='modal hide fade' id='ad-modal' role='dialog'>
+          <div class='modal-body'>
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <p>For now, please contact your physician or visit
+            <a href='http://clinicaltrials.gov'>clinicaltrials.gov</a>.</p>
+          </div>
+          <div class='modal-footer'></div>
+        </div>
+
+
+        <section id='researcher-network'>
+          <h4>Researcher network</h4>
+          <p>we have developed an open-source <a href="researcher-network">researcher network</a> for 
+          identifying common collaborators and research silos.</p>
+          </p>
+        </section>
+
+
+        <section id='open-source'>
+          <h4>Open source</h4>
+          <p>The data gathering and visualization tools used to generate our 
+          researcher network graph are
+          <a href="https://github.com/yosemitebandit/crabnet">available online, for free</a>.</p>
+
+          <p>Please get in touch if you are interested in learning more about the system.</p>
+        </section>
+
       </div>
 
     </div>
 
-    <script src="http://d3js.org/d3.v3.min.js"></script>
+
+    <script src="js/d3.v3.min.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap-modal.js"></script>
+    <script src="js/bootstrap-transition.js"></script>
     <script>
-      var width = 250;
-      var height = 300;
+
+      var width = $('#network-graph').width();
+      var height = 2*width - 0.5*width;
 
       var color = d3.scale.category20();
 
       var force = d3.layout.force()
           .charge(-120)
+          .gravity(0.09)
           .linkDistance(30)
           .size([width, height]);
+
+
+      setTimeout(function perturb() {
+        var bump = Math.random()/4;
+        force.alpha(bump);
+        var millis = Math.random()*800 + 3000
+        setTimeout(perturb, millis);
+      }, 4000);
+
 
       var svg = d3.select("#network-graph").append("svg")
           .attr("width", width)
