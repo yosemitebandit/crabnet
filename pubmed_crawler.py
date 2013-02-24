@@ -22,7 +22,7 @@ list_hash = []
 list_hashPair = []
 list_papersAuth = []
 list_papersPair = []
-
+paperInfo = []
 
 
 ## --------------------------------------
@@ -79,6 +79,8 @@ for i in range(ret_max):
         if s.attributes['Name'].value == 'PubDate':
             pubDate = s.childNodes[0].nodeValue
             #print pubDate
+        if s.attributes['Name'].value == 'Source':
+            journal = s.childNodes[0].nodeValue
         if s.attributes['Name'].value == 'LastAuthor':
             if len(s.childNodes) != 0:
                 lastAuthor = s.childNodes[0].nodeValue
@@ -91,7 +93,19 @@ for i in range(ret_max):
             except ValueError:
                 pass
 
+    ## -----------------------------------
+    ## paper info to array for json output
+    ## -----------------------------------
+    
 
+    this_paper_info = {
+                'PMIDs':publication_id,
+                'title':title,
+                'journal':journal,
+                'pub_date':pubDate
+                }
+        #print jsonAuth
+    paperInfo.append(this_paper_info)
         
     ## -----------------------------
     ## hash authors for lookup table
@@ -174,6 +188,7 @@ for h in range(len_authors):
 libAuth = {}
 libAuth['authorPairs'] = authorPairs
 libAuth['authorsOnly'] = authorsOnly
+libAuth['paperInfo'] = paperInfo
 
 filename = disease + '.txt'
 with open(filename, 'wa') as outfile:
