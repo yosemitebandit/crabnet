@@ -38,7 +38,7 @@
         background-color: #fdfdfd;
       }
 
-      #ad-network h5 {
+      #candidate-targeting h5 {
         margin-top: 0;
       }
 
@@ -82,9 +82,8 @@
           <li class='active'><a href="#about">about</a></li>
           <li><a href="#methods">methods</a></li>
           <li><a href="#team">team</a></li>
-          <li><a href="#ad-network">ad network</a></li>
+          <li><a href="#candidate-targeting">candidate targeting</a></li>
           <li><a href="#researcher-network">researcher network</a></li>
-          <li><a href="#open-source">open source</a></li>
         </ul>
       </div>
     </div>
@@ -96,24 +95,25 @@
       <div class="span8">
         <section id='about'>
           <h4>About</h4>
-          <p>Clinicians and pharmaceutical companies need new methodologies
-          to find eligible candidates for clinical trials.
-          Target Accrual works to <strong>increase enrollment</strong> via a <strong>custom ad network</strong>.
+          <p>Medical advancements depend on the successful completion of
+          clinical trials but <strong>48% fail</strong> to reach accrual targets for enrollment.
+          Pharma companies can lose up to <strong>$240MM per month</strong> when clinical trials are delayed.
+          Only 18% of participants were able in clinical trials found their options online.
           </p>
 
-          <p>Medical advancements depend on the successful completion of
-          clinical trials but <strong>48% fail</strong>
-          <p>48% of clinical trials <strong>fail</strong> to reach recruitment targets.</p>
-          <p>Treatment development costs $1B USD per year.</p>
-          <p>$8M is lost each day a clinical trial is delayed.</p>
-          <p>Only 18% of participants in clinical trials found their options online.</p>
+          <p>Clinicians and pharmaceutical companies need new methodologies
+          to find eligible candidates for clinical trials.
+          </p>
+
+          <p>Target Accrual works to <strong>increase enrollment</strong> via a <strong>custom ad network</strong>.
+          </p>
+
         </section>
 
         <section id='methods'>
           <h4>Methods</h4>
-          <p>We employ a diverse set of strategies to inform potential candidates 
-          about clinical trials for which they may be eligible:</p>
-
+          <p>We employ a diverse set of strategies to connect eligible candidates
+          and clinical trials:</p> 
           <ul>
             <li>We manage targeted Facebook and Google ad campaigns to rapidly seek out
             candidates.</li>
@@ -143,15 +143,16 @@
           </ul>
 
           <p>To get in touch, please email Hillary Lin &mdash; 
-          <a href='#'>hillarylin@stanford.edu</a>.</p>
+          <a href='#team'>hillarylin@stanford.edu</a>.</p>
 
         </section>
 
 
-        <section id='ad-network'>
-          <h4>Ad network</h4>
-          <p>Patient forums and other medical sites can use our custom display ads
-          to put clinical trial information in front of people who need to know.
+        <section id='candidate-targeting'>
+          <h4>Candidate targeting</h4>
+          <p>Our competitors create one-off campaigns for niche communities.
+          The technology behind Target Accrual's custom ad network helps us
+          identify eligible patients and communicate with them everywhere they are.
           </p>
 
           <a href='#ad-modal' data-toggle='modal'>
@@ -179,19 +180,10 @@
 
         <section id='researcher-network'>
           <h4>Researcher network</h4>
+          <p>Our system
           <p>we have developed an open-source <a href="researcher-network">researcher network</a> for 
           identifying common collaborators and research silos.</p>
           </p>
-        </section>
-
-
-        <section id='open-source'>
-          <h4>Open source</h4>
-          <p>The data gathering and visualization tools used to generate our 
-          researcher network graph are
-          <a href="https://github.com/yosemitebandit/crabnet">available online, for free</a>.</p>
-
-          <p>Please get in touch if you are interested in learning more about the system.</p>
         </section>
 
       </div>
@@ -206,7 +198,7 @@
     <script>
 
       var width = $('#network-graph').width();
-      var height = 2*width - 0.5*width;
+      var height = width;
 
       var color = d3.scale.category20();
 
