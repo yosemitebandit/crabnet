@@ -29,19 +29,21 @@
     </head>
     <body>
       <div id='container'>
-        <h2>The best way out is always through.</h2>
+        <h2>Do not wait to strike till the iron is hot; but make it hot by striking.</h2>
         <div class='row'>
-             <button id='clear-box'>Clear</button>
-          <div id="hover-info">
-         
+             <button id='clear-box'>Clear</button>         
           </div>
-          <div id='more-info-box'></div>
+          <div class='row contain-graphic'>
+            <div id='more-info-box'></div>
+          </div>
+          <div id="hover-info">
         </div>
+
       </div>
     </body>
     <script type="text/javascript">
     $(document).ready(function(){
-      $.getJSON('/papers.txt', function(response){
+      $.getJSON('/ocular+melanoma.txt', function(response){
         var w = 1280,
         h = 900,
         fill = d3.scale.category10(),
@@ -72,7 +74,7 @@
       });
       */
 
-      var vis = d3.select("#container").append("svg:svg")
+      var vis = d3.select(".contain-graphic").append("svg:svg")
           .attr("width", w)
           .attr("height", h);
 
@@ -81,7 +83,11 @@
           .links(links)
           .size([w, h])
           .start()
-          .gravity('0.08')
+          .gravity('0.25')
+          .charge(-40)
+          .linkDistance(function(d){
+            return 1000-d.value;
+          })
 
       var link = vis.selectAll('.link')
                     .data(links)
@@ -99,12 +105,14 @@
           .attr("class", "node")
           .attr("cx", function(d) { return d.x; })
           .attr("cy", function(d) { return d.y; })
-          .attr("r", 8)
+          .attr("r", function(d,i){
+            return hold_authors[i].paperCount;
+          })
           .attr('opacity', .6)
           .style("fill", function(d, i) { return 'red'; })
           .style("stroke", function(d, i) { return d3.rgb(fill(i & 3)).darker(2); })
           .style("stroke-width", 1.5)
-          .on('click', more_info);
+          .on('click', more_info)
 
       vis.style("opacity", 1e-6)
         .transition()
