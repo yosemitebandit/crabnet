@@ -1,19 +1,32 @@
 <html>
     <head>
         <title>D3 Test</title>
-        <script type="text/javascript" src="scripts/jquery.js"></script>
+        <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
         <script type="text/javascript" src="http://d3js.org/d3.v3.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="stylesheets/style.css">
+        <link href="stylesheets/bootstrap.min.css" rel="stylesheet" media="screen">
+        <script src="scripts/bootstrap.min.js"></script>
       <style>
-        #tooltip {
-          position: absolute;
-          left: 200px;
-          top: 94px;
+        #hover-info {
+          position: relative;
+          height: 50px;
+          width:100%;
+          border-top: 1px solid black;
+          border-bottom: 1px solid black;
+          vertical-align:middle;
+        }
+        #container{
+          padding-left:15%;
+          padding-right:15%;
         }
       </style>
     </head>
     <body>
-      <div id="tooltip"></div>
+      <div id='container'>
+        <h2>Rare Cancer Research Network</h2>
+        <div class='row'>
+          <div id="hover-info"></div>
+        </div>
+      </div>
     </body>
     <script type="text/javascript">
       var w = 1280,
@@ -28,7 +41,7 @@
         o.value = (Math.round(Math.random()*10));
       });
 
-      var vis = d3.select("body").append("svg:svg")
+      var vis = d3.select("#container").append("svg:svg")
           .attr("width", w)
           .attr("height", h);
 
@@ -36,7 +49,8 @@
           .nodes(nodes)
           .links(links)
           .size([w, h])
-          .start();
+          .start()
+          .gravity('0.03')
 
       var node = vis.selectAll("circle.node")
           .data(nodes)
@@ -49,6 +63,7 @@
           .style("stroke", function(d, i) { return d3.rgb(fill(i & 3)).darker(2); })
           .style("stroke-width", 1.5)
           .on("mouseover", hover)
+          .on("mouseout", offhover)
 
       var link = vis.selectAll('.link')
                     .data(links)
@@ -98,10 +113,31 @@
       });
 
       function hover(d) {
-              var num = Math.random()*40;
+        var index = [];
+        links.forEach(function(link,i){
+          console.log('link ' + link.source.x + ' ' + link.source.y)
+          console.log('node ' + d.x + ' ' + d.y);
+          if ((link.source.x == d.x & link.source.y == d.y) | (link.target.x == d.x & link.target.y == d.y)){
+            index.push(i);
+          }
+        });
 
-            d3.select("#tooltip")
-                .html(d.item + "<br/><span>" + num + "</span>");
+        console.log(index);
+
+        var num = Math.random()*40;
+
+        d3.select("#hover-info")
+            .html('Author' + 'Professor X' + "<br/>Papers: " + d.x);
+
+        link.attr('stroke', function(d, i){
+          if (index.indexOf(i) > -1) {
+            return 'yellow';
+          }
+        })  
       };
+
+      function offhover(d){
+          link.attr('stroke', 'black')
+      }
    </script>
  </html>

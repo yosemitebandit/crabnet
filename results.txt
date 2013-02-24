@@ -1,0 +1,40 @@
+23430217
+{"PMID": "23430217", "disease": "pancreatic+neuroendocrine", "title": "Diagnosis and management of insulinoma."}
+23429748
+{"PMID": "23429748", "disease": "pancreatic+neuroendocrine", "title": "Neuroendocrine tumours: cracking the epigenetic code."}
+23427520
+{"PMID": "23427520", "disease": "pancreatic+neuroendocrine", "title": "Bilateral pheochromocytoma as first manifestation of von Hippel-Lindau disease: a case report."}
+23425942
+{"PMID": "23425942", "disease": "pancreatic+neuroendocrine", "title": "PAX8 is a novel marker for differentiating between various types of tumor, particularly ovarian epithelial carcinomas."}
+23423501
+{"PMID": "23423501", "disease": "pancreatic+neuroendocrine", "title": "Factors Predictive of Adverse Events Associated with Endoscopic Ultrasound-Guided Fine Needle Aspiration of Pancreatic Solid Lesions."}
+23419523
+{"PMID": "23419523", "disease": "pancreatic+neuroendocrine", "title": "PI3K/Akt/mTOR Pathway Inhibitors in the Therapy of Pancreatic Neuroendocrine Tumors."}
+23408736
+{"PMID": "23408736", "disease": "pancreatic+neuroendocrine", "title": "Cytomorphologic and immunophenotypical features of acinar cell neoplasms of the pancreas."}
+23407486
+{"PMID": "23407486", "disease": "pancreatic+neuroendocrine", "title": "Radioembolization for treatment of liver metastases from neuroendocrine tumors: correlation with imaging and biomarkers."}
+23407483
+{"PMID": "23407483", "disease": "pancreatic+neuroendocrine", "title": "Sunitinib for the Treatment of Metastatic Paraganglioma and Vasoactive Intestinal Polypeptide-Producing Tumor (VIPoma)."}
+23404855
+{"PMID": "23404855", "disease": "pancreatic+neuroendocrine", "title": "Frequency and characterization of gastro-entero-pancreatic neuroendocrine tumor patients with high grade of uptake at somatostatin receptor scintigraphy."}
+23400300
+{"PMID": "23400300", "disease": "pancreatic+neuroendocrine", "title": "Nervous system involvement in von Hippel-Lindau disease: pathology and mechanisms."}
+23396710
+{"PMID": "23396710", "disease": "pancreatic+neuroendocrine", "title": "Pancreaticogastrostomy: a salvage procedure for pancreatic body and neck resection."}
+23392944
+{"PMID": "23392944", "disease": "pancreatic+neuroendocrine", "title": "Taurine's Effects on the Neuroendocrine Functions of Pancreatic \u03b2 Cells."}
+23392072
+{"PMID": "23392072", "disease": "pancreatic+neuroendocrine", "title": "Treatment with the Radiolabelled Somatostatin Analog Lu-DOTATATE for Advanced Pancreatic Neuroendocrine Tumors."}
+23391117
+{"PMID": "23391117", "disease": "pancreatic+neuroendocrine", "title": "The management of extrapulmonary poorly differentiated (high-grade) neuroendocrine carcinomas."}
+23391115
+{"PMID": "23391115", "disease": "pancreatic+neuroendocrine", "title": "Systemic therapy for advanced pancreatic neuroendocrine tumors."}
+23391113
+{"PMID": "23391113", "disease": "pancreatic+neuroendocrine", "title": "Update on the role of somatostatin analogs for the treatment of patients with gastroenteropancreatic neuroendocrine tumors."}
+23391111
+{"PMID": "23391111", "disease": "pancreatic+neuroendocrine", "title": "The genetics of neuroendocrine tumors."}
+23391110
+{"PMID": "23391110", "disease": "pancreatic+neuroendocrine", "title": "Pathology reporting of neuroendocrine tumors: essential elements for accurate diagnosis, classification, and staging."}
+23391109
+{"PMID": "23391109", "disease": "pancreatic+neuroendocrine", "title": "The evolving landscape of neuroendocrine tumors."}
