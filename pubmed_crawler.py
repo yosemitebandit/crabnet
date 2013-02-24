@@ -20,14 +20,16 @@ auth_dict = {}
 list_auth = []
 list_hash = []
 list_hashPair = []
-list_papers = []
+list_papersAuth = []
+list_papersPair = []
 
 
 
 ## --------------------------------------
 ## get all PMIDs on initial disease query
 ## --------------------------------------
-disease = "pancreatic+neuroendocrine"
+disease = "ultrasound+neuromodulation"
+#disease = "pancreatic+neuroendocrine"
 ret_max = 20
 
 base_url = "http://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed"
@@ -87,16 +89,8 @@ for i in range(ret_max):
             except ValueError:
                 pass
 
-        # "title":"Chordoma genetic sequencing",
-        # "year": 2004,
-        # "month": 3,
-        # "authors": [12,8,2,5],
-        # "URL": 34545,
-        # "disease": "Chordoma",
-        # "leading": 12,
-        # "last author": 5,
-        # "index": 8
 
+        
     ## -----------------------------
     ## hash authors for lookup table
     ## -----------------------------
@@ -105,33 +99,74 @@ for i in range(ret_max):
 
     for i in range(len_authors):
         author = authors[i]
-        author_hashed = hash(author)
-        auth_dict.update({author:author_hashed})
+        if author not in list_auth:
+            list_auth.append(author)
+    
+    # for i in range(len_authors):
+        # author = authors[i]
+        # author_hashed = hash(author)
+        # auth_dict.update({author:author_hashed})
+    
+    
+    # tally papers by single author
+    
 
-    # permutations to tally papers
+    # permutations to tally papers by pairs of authors
     for j in range(len_authors-1):
 
         author1 = authors[j]
-        hash1 = auth_dict[author1]
+        hash1 = list_auth.index(author1)
+        #hash1 = auth_dict[author1]
         for k in range(j+1, len_authors):
             author2 = authors[k]
-            hash2 = auth_dict[author2]
+            hash2 = list_auth.index(author2)
+            #hash2 = auth_dict[author2]
 
             hashPair = [hash1, hash2]
-            hashPair = hashPair.sort()
+            hashPair.sort()            
 
             if hashPair not in list_hashPair:
                 list_hashPair.append(hashPair)
-                list_papers.append(int(publication_id))
+                list_papersPair.append([int(publication_id)])
+            else:
+                thisHashPairPapersIdx = list_hashPair.index(hashPair)
+                thisHashPairPapers = list_papersPair[thisHashPairPapersIdx]
+                thisHashPairPapers.append(int(publication_id))
+                list_papersPair[thisHashPairPapersIdx] = thisHashPairPapers
 
-print auth_dict
-print list_hashPair
-print list_papers
+## ---------------------------------------------------------------
+## count number of papers each pair of authors has writen together
+## ---------------------------------------------------------------
 
-    ## --------------------------------
-    ## write json file indexed by paper
-    ## --------------------------------
 
-    # print json.dumps({'PMID':publication_id, 'title':title, 'title':title, 'disease':disease})
-    # with open('papers.txt', 'aw') as outfile:
-    #     json.dumps({'PMID': publication_id, 'title':title, 'disease':disease}, outfile)
+count = []
+len_pairs = len(list_hashPair)
+library = []
+for h in range(len_pairs):
+    count.append(len(list_papersPair[h]))
+    jsonOut = {
+            'authorA':list_hashPair[h][0],
+            'authorB':list_hashPair[h][1],
+            'paperCount':count[h],
+            'PMIDs':list_papersPair[h]
+            }
+    print jsonOut
+    library.append(jsonOut)
+    
+with open('papers.txt', 'w') as outfile:
+    json.dump(library, outfile)         
+
+#print auth_dict
+#print list_hashPair
+#print list_papers
+#print count
+
+
+# ## --------------------------------
+# ## write json file indexed by paper
+# ## --------------------------------
+
+
+# # print json.dumps({'PMID':publication_id, 'title':title, 'title':title, 'disease':disease})
+# with open('papers.txt', 'aw') as outfile:
+    # json.dumps({'PMID': publication_id, 'title':title, 'disease':disease}, outfile)
