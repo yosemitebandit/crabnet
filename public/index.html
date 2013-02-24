@@ -1,30 +1,112 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!doctype html>
 <html lang="en">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Target Accrual</title>
+    <meta charset="UTF-8" />
+    <meta name="author" content="Will, Stephanie, Hillary, Fokale, Patrick, Jas, Matt" />
+    <meta name="keywords" content="clinical trials, participants, registration" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="icon" type="image/gif" href="favicon.gif" />
     <link href="css/bootstrap.css" rel="stylesheet">
     <link href="css/bootstrap-responsive.css" rel="stylesheet">
-    <link href='http://fonts.googleapis.com/css?family=Ubuntu:300,300italic' rel='stylesheet' type='text/css'>
+
+    <title>Target Accrual</title>
 
     <style>
-      body {
-        font-family: 'Ubuntu', sans-serif;
+
+      .node {
+        stroke: #fff;
+        stroke-width: 0.5px;
       }
+
+      .link {
+        stroke: #999;
+        stroke-opacity: 0.6;
+      }
+
     </style>
+
 
   </head>
 
   <body>
-    <div class="container-fluid">
-      <div class="row-fluid">
-        <div class="span12">
-          <h1>Target Accrual
-            <small>improving clinical trial recruitment</small>
-          </h1>
-
-        </div>
+    <div class="row">
+      <div class="span4" id="network-graph">
+        <!-- standalone network graph -->
       </div>
+
+      <div class="span8">
+        <h1>Target Accrual
+          <small>improving clinical trial recruitment</small>
+        </h1>
+
+        <ul class='nav nav-pills'>
+          <li class='active'><a href="#">home</a></li>
+          <li><a href="#">methods</a></li>
+          <li><a href="#">about</a></li>
+          <li><a href="#">team</a></li>
+          <li><a href="#">research network</a></li>
+        </ul>
+
+        <p>30% of clinical trials <strong>fail</strong> to reach recruitment targets.</p>
+        <p>Treatment development costs $1B USD per year.</p>
+        <p>18% of participants in clinical trials do not know about clinicaltrials.gov</p>
+      </div>
+
     </div>
+
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <script>
+      var width = 250;
+      var height = 300;
+
+      var color = d3.scale.category20();
+
+      var force = d3.layout.force()
+          .charge(-120)
+          .linkDistance(30)
+          .size([width, height]);
+
+      var svg = d3.select("#network-graph").append("svg")
+          .attr("width", width)
+          .attr("height", height);
+
+      d3.json("static-data.json", function(error, graph) {
+        force
+            .nodes(graph.nodes)
+            .links(graph.links)
+            .start();
+
+        var link = svg.selectAll(".link")
+            .data(graph.links)
+            .enter().append("line")
+            .attr("class", "link")
+            .style("stroke-width", function(d) { return Math.sqrt(d.value); });
+
+        var node = svg.selectAll(".node")
+            .data(graph.nodes)
+            .enter().append("circle")
+            .attr("class", "node")
+            .attr("r", 5)
+            .style("fill", function(d) { return color(d.group); })
+            .call(force.drag);
+
+        node.append("title")
+            .text(function(d) { return d.name; });
+
+        force.on("tick", function() {
+          link.attr("x1", function(d) { return d.source.x; })
+              .attr("y1", function(d) { return d.source.y; })
+              .attr("x2", function(d) { return d.target.x; })
+              .attr("y2", function(d) { return d.target.y; });
+
+          node.attr("cx", function(d) { return d.x; })
+              .attr("cy", function(d) { return d.y; });
+        });
+      });
+
+    </script>
+
   </body>
 </html>
