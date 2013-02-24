@@ -3,8 +3,6 @@
         <title>D3 Test</title>
         <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
         <script type="text/javascript" src="http://d3js.org/d3.v3.min.js"></script>
-        <link href="stylesheets/bootstrap.min.css" rel="stylesheet" media="screen">
-        <script src="scripts/bootstrap.min.js"></script>
       <style>
         #hover-info {
           position: relative;
@@ -43,7 +41,7 @@
     </body>
     <script type="text/javascript">
     $(document).ready(function(){
-      $.getJSON('network-data/chordoma.txt', function(response){
+      $.getJSON('../network-data/chordoma.txt', function(response){
         var w = 1280,
         h = 900,
         fill = d3.scale.category10(),
