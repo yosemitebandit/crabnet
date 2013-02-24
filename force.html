@@ -39,20 +39,30 @@
       </div>
     </body>
     <script type="text/javascript">
-      var w = 1280,
-          h = 900,
-          fill = d3.scale.category10(),
-          nodes = d3.range(100).map(Object),
-          links = d3.range(100).map(Object);
+    $(document).ready(function(){
+      $.getJSON('/papers.txt', function(response){
+        var w = 1280,
+        h = 900,
+        fill = d3.scale.category10(),
+        nodes = d3.range(1000).map(Object),
+        links = d3.range(1000).map(Object);
 
-      var mouseX = 0,
+        var index = 0;
+        var mouseX = 0,
           mouseY = 0;
 
-      links.forEach(function(o,i){
+          console.log(response)
+
+        for (var j = 0; j < response.length-2; j++){
+          console.log(j + ' author A ' + response[j].authorA + ' author B ' + response[j].authorB + ' value ' + response[j].paperCount);
+          //links[j] = {source: nodes[response[j].authorA], target: nodes[response[j].authorB], value: response[j].paperCount};
+        }
+
+      /*links.forEach(function(o,i){
         o.source = nodes[(Math.round(Math.random()*99))];
         o.target = nodes[(Math.round(Math.random()*99))];
         o.value = (Math.round(Math.random()*10));
-      });
+      });*/
 
       var vis = d3.select("#container").append("svg:svg")
           .attr("width", w)
@@ -74,6 +84,7 @@
                     })
                     .attr('stroke','#999')
                     .attr('stroke-opacity', '0.6')
+                    .on('click', more_info)
 
       var node = vis.selectAll("circle.node")
           .data(nodes)
@@ -87,7 +98,6 @@
           .style("stroke-width", 1.5)
           .on("mouseover", hover)
           .on("mouseout", offhover)
-          .on('click', more_info)
 
       vis.style("opacity", 1e-6)
         .transition()
@@ -185,7 +195,7 @@
         $('#more-info-box').css('top', mouseY);
 
         d3.select('#more-info-box')
-          .html('Author' + 'Professor X' + "<br/>Papers: " + d.x);
+          .html('Author' + 'Professor X' + "<br/>Papers: " + d.author);
       }
 
       $('#clear-box').click(function(){
@@ -196,5 +206,6 @@
         mouseX = e.pageX;
         mouseY = e.pageY;
       })
+            })});
    </script>
  </html>
