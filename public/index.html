@@ -143,11 +143,11 @@
 
 
       setTimeout(function perturb() {
-        var bump = Math.random()/2;
+        var bump = Math.random()/4;
         force.alpha(bump);
-        var millis = Math.random()*800 + 800
+        var millis = Math.random()*800 + 3000
         setTimeout(perturb, millis);
-      }, 2000);
+      }, 4000);
 
 
       var svg = d3.select("#network-graph").append("svg")
