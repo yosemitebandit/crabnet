@@ -28,7 +28,8 @@ list_papersPair = []
 ## --------------------------------------
 ## get all PMIDs on initial disease query
 ## --------------------------------------
-disease = "chordoma"
+disease = "skin+melanoma"
+#disease = "chordoma"
 #disease = "ultrasound+neuromodulation"
 #disease = "pancreatic+neuroendocrine"
 ret_max = 100
@@ -79,8 +80,8 @@ for i in range(ret_max):
             pubDate = s.childNodes[0].nodeValue
             #print pubDate
         if s.attributes['Name'].value == 'LastAuthor':
-            lastAuthor = s.childNodes[0].nodeValue
-            #print lastAuthor
+            if len(s.childNodes) != 0:
+                lastAuthor = s.childNodes[0].nodeValue
         if s.attributes['Name'].value == 'Author':
             author = s.childNodes[0].nodeValue
             #author.encode('ascii', 'ignore')
@@ -174,7 +175,8 @@ libAuth = {}
 libAuth['authorPairs'] = authorPairs
 libAuth['authorsOnly'] = authorsOnly
 
-with open('papers.txt', 'wa') as outfile:
+filename = disease + '.txt'
+with open(filename, 'wa') as outfile:
     json.dump(libAuth, outfile)
 
 
