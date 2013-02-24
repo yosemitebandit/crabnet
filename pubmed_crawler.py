@@ -28,9 +28,11 @@ list_papersPair = []
 ## --------------------------------------
 ## get all PMIDs on initial disease query
 ## --------------------------------------
-disease = "ultrasound+neuromodulation"
+disease = "skin+melanoma"
+#disease = "chordoma"
+#disease = "ultrasound+neuromodulation"
 #disease = "pancreatic+neuroendocrine"
-ret_max = 20
+ret_max = 100
 
 base_url = "http://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed"
 publication_list_url = "%s&term=%s&retmax=%s" % (base_url, disease, ret_max)
@@ -78,8 +80,8 @@ for i in range(ret_max):
             pubDate = s.childNodes[0].nodeValue
             #print pubDate
         if s.attributes['Name'].value == 'LastAuthor':
-            lastAuthor = s.childNodes[0].nodeValue
-            #print lastAuthor
+            if len(s.childNodes) != 0:
+                lastAuthor = s.childNodes[0].nodeValue
         if s.attributes['Name'].value == 'Author':
             author = s.childNodes[0].nodeValue
             #author.encode('ascii', 'ignore')
@@ -141,7 +143,7 @@ for i in range(ret_max):
 ## ---------------------------------------------------------------
 count = []
 len_pairs = len(list_hashPair)
-library = []
+authorPairs = []
 for h in range(len_pairs):
     count.append(len(list_papersPair[h]))
     jsonOut = {
@@ -150,30 +152,34 @@ for h in range(len_pairs):
             'paperCount':count[h],
             'PMIDs':list_papersPair[h]
             }
-    print jsonOut
-    library.append(jsonOut)
-    
-with open('papers.txt', 'w') as outfile:
-    json.dump(library, outfile)         
-
+    #print jsonOut
+    authorPairs.append(jsonOut)
 
 ## ---------------------------------
 ## json file for author paper output    
 ## ---------------------------------
 
 len_authors = len(list_auth)
-libAuth = []
+authorsOnly = []
 for h in range(len_authors):
-    count.append(len(list_papersPair[h]))
     jsonAuth = {
-            'author':h,
+            'author_id':h,
+            'author_name':list_auth[h],
             'papers':list_papersAuth[h]
             }
-    print jsonAuth
-    libAuth.append(jsonAuth)
+    #print jsonAuth
+    authorsOnly.append(jsonAuth)
+    
+    
+libAuth = {}
+libAuth['authorPairs'] = authorPairs
+libAuth['authorsOnly'] = authorsOnly
 
-with open('authPapers.txt', 'w') as outfile:
-    json.dump(library, outfile)   
+filename = disease + '.txt'
+with open(filename, 'wa') as outfile:
+    json.dump(libAuth, outfile)
+
+
     
 #print auth_dict
 #print list_hashPair
