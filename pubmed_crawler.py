@@ -27,7 +27,8 @@ list_papers = []
 ## --------------------------------------
 ## get all PMIDs on initial disease query
 ## --------------------------------------
-disease = "pancreatic+neuroendocrine"
+disease = "ultrasound+neuromodulation"
+#disease = "pancreatic+neuroendocrine"
 ret_max = 20
 
 base_url = "http://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed"
@@ -97,6 +98,7 @@ for i in range(ret_max):
         # "last author": 5,
         # "index": 8
 
+        
     ## -----------------------------
     ## hash authors for lookup table
     ## -----------------------------
@@ -118,15 +120,32 @@ for i in range(ret_max):
             hash2 = auth_dict[author2]
 
             hashPair = [hash1, hash2]
-            hashPair = hashPair.sort()
+            hashPair.sort()            
 
             if hashPair not in list_hashPair:
                 list_hashPair.append(hashPair)
-                list_papers.append(int(publication_id))
+                list_papers.append([int(publication_id)])
+            else:
+                thisHashPairPapersIdx = list_hashPair.index(hashPair)
+                thisHashPairPapers = list_papers[thisHashPairPapersIdx]
+                thisHashPairPapers.append(int(publication_id))
+                list_papers[thisHashPairPapersIdx] = thisHashPairPapers
 
-print auth_dict
-print list_hashPair
-print list_papers
+## ---------------------------------------------------------------
+## count number of papers each pair of authors has writen together
+## ---------------------------------------------------------------
+
+count = []
+len_pairs = len(list_hashPair)
+for h in range(len_pairs):
+    count.append(len(list_papers[h]))
+    
+
+#print auth_dict
+#print list_hashPair
+#print list_papers
+print count
+
 
     ## --------------------------------
     ## write json file indexed by paper
