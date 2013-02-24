@@ -43,6 +43,7 @@
 
       #research-topic {
         height: 16px;
+        margin: 0 auto;
       }
     </style>
   </head>
@@ -104,7 +105,8 @@
   </body>
 
   <script src="../js/jquery.min.js"></script>
-  <script type="text/javascript" src="../js/d3.v3.min.js"></script>
+  <script src="../js/bootstrap-typeahead.js"></script>
+  <script src="../js/d3.v3.min.js"></script>
 
   <script>
     var topics = {
@@ -114,9 +116,19 @@
       , "skin melanoma": 'skin+melanoma.txt'
     }
 
+    // grab the topics for typeahead provision
+    var topic_keys = [];
+    for (var k in topics) topic_keys.push(k);
+
     $(function() {
+
       // prepopulate topic input
       $('#research-topic').val('chordoma');
+
+      // setup typeahead for topic input
+      $('#research-topic').typeahead({
+        source: topic_keys
+      });
 
       // wait for input to change
       $('#research-topic').change(function() {
@@ -125,7 +137,6 @@
 
         if (selection in topics) {
           // load json
-          console.log('whoa');
           load_graph(topics[selection]);
         }
       }).change();
