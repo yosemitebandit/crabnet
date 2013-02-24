@@ -28,9 +28,10 @@ list_papersPair = []
 ## --------------------------------------
 ## get all PMIDs on initial disease query
 ## --------------------------------------
-disease = "ultrasound+neuromodulation"
+disease = "chordoma"
+#disease = "ultrasound+neuromodulation"
 #disease = "pancreatic+neuroendocrine"
-ret_max = 20
+ret_max = 100
 
 base_url = "http://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed"
 publication_list_url = "%s&term=%s&retmax=%s" % (base_url, disease, ret_max)
@@ -141,7 +142,7 @@ for i in range(ret_max):
 ## ---------------------------------------------------------------
 count = []
 len_pairs = len(list_hashPair)
-library = []
+authorPairs = []
 for h in range(len_pairs):
     count.append(len(list_papersPair[h]))
     jsonOut = {
@@ -150,30 +151,31 @@ for h in range(len_pairs):
             'paperCount':count[h],
             'PMIDs':list_papersPair[h]
             }
-    print jsonOut
-    library.append(jsonOut)
-    
-with open('papers.txt', 'w') as outfile:
-    json.dump(library, outfile)         
-
+    #print jsonOut
+    authorPairs.append(jsonOut)
 
 ## ---------------------------------
 ## json file for author paper output    
 ## ---------------------------------
 
 len_authors = len(list_auth)
-libAuth = []
+authorsOnly = []
 for h in range(len_authors):
-    count.append(len(list_papersPair[h]))
     jsonAuth = {
             'author':h,
             'papers':list_papersAuth[h]
             }
-    print jsonAuth
-    libAuth.append(jsonAuth)
+    #print jsonAuth
+    authorsOnly.append(jsonAuth)
 
-with open('authPapers.txt', 'w') as outfile:
-    json.dump(library, outfile)   
+    
+libAuth = {}
+libAuth['libraries'] = authorPairs
+libAuth['authors'] = authorsOnly    
+with open('papers.txt', 'wa') as outfile:
+    json.dump(libAuth, outfile)
+
+
     
 #print auth_dict
 #print list_hashPair
