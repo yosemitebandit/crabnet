@@ -49,18 +49,31 @@
         color: #445566;
       }
 
+      .header {
+        background: #EEE;
+      }
+
+      .header-inner {
+        margin-top: 20px;
+      }
+
+      .nav {
+        margin-top: 25px;
+        margin-bottom: 10px;
+      }
+
+      .content {
+        margin-top: 20px;
+      }
+
     </style>
 
 
   </head>
 
   <body>
-    <div class="row">
-      <div class="span4" id="network-graph">
-        <!-- standalone network graph -->
-      </div>
-
-      <div class="span8">
+    <div class="row header">
+      <div class="span8 offset4 header-inner">
         <h1>Target Accrual
           <small>modern recruitment for clinical trials</small>
         </h1>
@@ -73,12 +86,19 @@
           <li><a href="#researcher-network">researcher network</a></li>
           <li><a href="#open-source">open source</a></li>
         </ul>
+      </div>
+    </div>
+    <div class="row content">
+      <div class="span4" id="network-graph">
+        <!-- standalone network graph -->
+      </div>
 
+      <div class="span8">
         <section id='about'>
-          <h4>about</h4>
+          <h4>About</h4>
           <p>Clinicians and pharmaceutical companies need new methodologies
           to find eligible candidates for clinical trials.
-          Target Accrual works to <strong>increase enrollment</strong> via a multi-pronged approach.
+          Target Accrual works to <strong>increase enrollment</strong> via a <strong>custom ad network</strong>.
           </p>
 
           <p>Medical advancements depend on the successful completion of
@@ -90,7 +110,7 @@
         </section>
 
         <section id='methods'>
-          <h4>methods</h4>
+          <h4>Methods</h4>
           <p>We employ a diverse set of strategies to inform potential candidates 
           about clinical trials for which they may be eligible:</p>
 
@@ -106,7 +126,7 @@
 
 
         <section id='team'>
-          <h4>team</h4>
+          <h4>Team</h4>
           <p>Our group members hail from a diverse set of backgrounds, including Stanford Medicine,
           Duke Biomedical Engineering, Google X and the Microsoft Display Ads team.
           We connected at the <a href="http://startxmed.com">StartX-Med</a> 2013 hackathon.
@@ -129,7 +149,7 @@
 
 
         <section id='ad-network'>
-          <h4>ad network</h4>
+          <h4>Ad network</h4>
           <p>Patient forums and other medical sites can use our custom display ads
           to put clinical trial information in front of people who need to know.
           </p>
@@ -158,7 +178,7 @@
 
 
         <section id='researcher-network'>
-          <h4>researcher network</h4>
+          <h4>Researcher network</h4>
           <p>we have developed an open-source <a href="researcher-network">researcher network</a> for 
           identifying common collaborators and research silos.</p>
           </p>
@@ -166,7 +186,7 @@
 
 
         <section id='open-source'>
-          <h4>open source</h4>
+          <h4>Open source</h4>
           <p>The data gathering and visualization tools used to generate our 
           researcher network graph are
           <a href="https://github.com/yosemitebandit/crabnet">available online, for free</a>.</p>
