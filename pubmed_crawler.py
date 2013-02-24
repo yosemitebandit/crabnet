@@ -101,7 +101,7 @@ for i in range(ret_max):
         author = authors[i]
         if author not in list_auth:
             list_auth.append(author)
-    
+            list_papersAuth.append([])
     # for i in range(len_authors):
         # author = authors[i]
         # author_hashed = hash(author)
@@ -109,8 +109,10 @@ for i in range(ret_max):
     
     
     # tally papers by single author
+    for g in range(len_authors):
+        list_author_idx = list_auth.index(authors[g])
+        list_papersAuth[list_author_idx].append(int(publication_id))    
     
-
     # permutations to tally papers by pairs of authors
     for j in range(len_authors-1):
 
@@ -137,8 +139,6 @@ for i in range(ret_max):
 ## ---------------------------------------------------------------
 ## count number of papers each pair of authors has writen together
 ## ---------------------------------------------------------------
-
-
 count = []
 len_pairs = len(list_hashPair)
 library = []
@@ -156,10 +156,30 @@ for h in range(len_pairs):
 with open('papers.txt', 'w') as outfile:
     json.dump(library, outfile)         
 
+
+## ---------------------------------
+## json file for author paper output    
+## ---------------------------------
+
+len_authors = len(list_auth)
+libAuth = []
+for h in range(len_authors):
+    count.append(len(list_papersPair[h]))
+    jsonAuth = {
+            'author':h,
+            'papers':list_papersAuth[h]
+            }
+    print jsonAuth
+    libAuth.append(jsonAuth)
+
+with open('authPapers.txt', 'w') as outfile:
+    json.dump(library, outfile)   
+    
 #print auth_dict
 #print list_hashPair
 #print list_papers
 #print count
+#print list_papersAuth
 
 
 # ## --------------------------------
