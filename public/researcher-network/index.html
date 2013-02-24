@@ -93,7 +93,7 @@
         <section>
           <h5>Methods</h5>
           <p>Papers are extracted via PubMed searches on certain keywords
-          and parsed for author information.  Scraper source code is available
+          and parsed for author information.  The scraper's source code is available
           <a href="https://github.com/yosemitebandit/crabnet">on GitHub</a>.</p>
         </section>
 
@@ -111,7 +111,7 @@
       "chordoma": 'chordoma.txt'
       , "ocular melanoma": 'ocular+melanoma.txt'
       , "polycythemia vera": 'polycythemia+vera.txt'
-      , "skin melanoma": 'skin melanoma.txt'
+      , "skin melanoma": 'skin+melanoma.txt'
     }
 
     $(function() {
@@ -127,9 +127,6 @@
           // load json
           console.log('whoa');
           load_graph(topics[selection]);
-
-          } else {
-          console.log('nerp');
         }
       }).change();
 
@@ -142,6 +139,10 @@
     function load_graph(dataset) {
       // dataset is, for instance, "chordoma.txt"
       $.getJSON('../network-data/' + dataset, function(response){
+        // data's loaded, clear out any old graphics
+        $('.contain-graphic').html('');
+
+        // build a new graphic
         var w = $('.contain-graphic').width(),
         h = $(window).height()-50,
         fill = d3.scale.category10(),
