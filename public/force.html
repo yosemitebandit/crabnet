@@ -28,7 +28,7 @@
     </head>
     <body>
       <div id='container'>
-        <h2>GO TEAM!</h2>
+        <h2>The best way out is always through.</h2>
         <div class='row'>
              <button id='clear-box'>Clear</button>
           <div id="hover-info">
@@ -41,28 +41,27 @@
     <script type="text/javascript">
     $(document).ready(function(){
       $.getJSON('/papers.txt', function(response){
-        console.log(response);
         var w = 1280,
         h = 900,
         fill = d3.scale.category10(),
-        nodes = d3.range(85).map(Object),
-        links = d3.range(response.length).map(Object);
+        nodes = d3.range(response.authors.length).map(Object),
+        links = d3.range(response.libraries.length).map(Object);
 
-        var hold_authors = [];
+        var hold_authors = d3.range(response.authors.length).map(Object);
 
         var index = 0;
         var mouseX = 0,
             mouseY = 0;
 
-
-        for (var j = 0; j < response.authorPairs.length; j++){
-         // console.log(j + ' author A ' + response[j].authorA + ' author B ' + response[j].authorB + ' value ' + response[j].paperCount);
-          links[j] = {source: nodes[response[j].authorPairs.authorA], target: nodes[response[j].authorPairs.authorB], value: response[j].authorPairs.paperCount};
+        for (var j = 0; j < response.libraries.length; j++){
+          //console.log(j + ' author A ' + response.libraries[j].authorA + ' author B ' + response.libraries[j].authorB + ' value ' + response.libraries[j].paperCount);
+          links[j] = {source: nodes[response.libraries[j].authorA], target: nodes[response.libraries[j].authorB], value: response.libraries[j].paperCount};
         }
 
-       /* $.each(response.library2, function(entry,i){
-          author[i] = {name: entry.author, index: i, paperCount: papers.length, papers: papers };
-        })*/
+        $.each(response.authors, function(i,entry){
+          //console.log('here')
+          hold_authors[i] = {name: entry.author, paperCount: entry.papers.length, paper: entry.papers };
+        })
 
       /*
       links.forEach(function(o,i){
@@ -81,7 +80,7 @@
           .links(links)
           .size([w, h])
           .start()
-          .gravity('0.03')
+          .gravity('0.07')
 
       var link = vis.selectAll('.link')
                     .data(links)
@@ -206,13 +205,12 @@
           //console.log('link ' + link.source.x + ' ' + link.source.y)
           //console.log('node ' + d.x + ' ' + d.y);console.log('node ' + d.x + ' ' + d.y);
           if (node.x == d.x & node.y == d.y){
-            console.log(i);
             index = i;
           }
         });
 
-      //  d3.select('#more-info-box')
-      //    .html('Author' + authors[index].name + "<br/>Papers: " + authors[index].paperCount);
+        d3.select('#more-info-box')
+          .html('Author' + hold_authors[index].name + "<br/>Papers: " + hold_authors[index].paperCount);
       }
 
       $('#clear-box').click(function(){
