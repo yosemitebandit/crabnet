@@ -1,30 +1,75 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html lang="en">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Target Accrual</title>
-    <link href="css/bootstrap.css" rel="stylesheet">
-    <link href="css/bootstrap-responsive.css" rel="stylesheet">
-    <link href='http://fonts.googleapis.com/css?family=Ubuntu:300,300italic' rel='stylesheet' type='text/css'>
+<!doctype html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta charset="UTF-8" />
+  <meta name="author" content="Will, Stephanie, Hillary, Fokale, Patrick, Jas, Matt" />
+  <meta name="keywords" content="clinical trials, participants, registration" />
+  <link rel="icon" type="image/gif" href="favicon.gif" />
+  <link href="css/bootstrap.css" rel="stylesheet">
+  <link href="css/bootstrap-responsive.css" rel="stylesheet">
+  <link href='http://fonts.googleapis.com/css?family=Ubuntu:300,300italic' rel='stylesheet' type='text/css'>
 
-    <style>
-      body {
-        font-family: 'Ubuntu', sans-serif;
-      }
-    </style>
+  <title>Target Accrual</title>
 
-  </head>
+  <style>
+    body {
+      margin-top: 3%
+      font-family: 'Ubuntu', sans-serif;
+      background-color: #ECD078;
+      color: #53777a;
+      line-height: 24px;
+    }
 
-  <body>
-    <div class="container-fluid">
-      <div class="row-fluid">
-        <div class="span12">
-          <h1>Target Accrual
-            <small>improving clinical trial recruitment</small>
-          </h1>
+    h1 {
+      text-align: center;
+      text-indent: -.12em;
+      color: #f4f1de;
+      font: 40px 'Ubuntu', "anchor-web-1","anchor-web-2", 'Impact', sans-serif;
+      font-weight: 900;
+      display: inline-block;
+      margin: 0 auto;
+      line-height: 1;
+      width: 100%;
+      text-shadow: #C4AD64 .01em .01em 0,
+          #C4AD64 .02em .02em 0,
+          #C4AD64 .03em .03em 0,
+          #C4AD64 .04em .04em 0,
+          #C4AD64 .05em .05em 0,
+          #C4AD64 .06em .06em 0,
+          #C4AD64 .07em .07em 0,			
+          #C4AD64 .08em .08em 0,
+          #C4AD64 .09em .09em 0,
+          #C4AD64 .1em .1em 0;
+    }
+  </style>
 
-        </div>
+</head>
+
+<body>
+  <div class="container-fluid">
+    <div class="row-fluid">
+      <div class="span4">
+        <!-- standalone network graph -->
       </div>
+
+      <div class="span8">
+        <h1>Target Accrual
+          <small>improving clinical trial recruitment</small>
+        </h1>
+      </div>
+
     </div>
-  </body>
+  </div>
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script src="https://raw.github.com/davatron5000/FitText.js/master/jquery.fittext.js"></script>
+  <script>
+    $(function() {
+
+      $('h1').lettering();
+
+    });
+
+  </script>
+</body>
 </html>
