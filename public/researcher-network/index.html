@@ -36,6 +36,14 @@
       #header {
         margin-left: 10px;
       }
+
+      section {
+        margin-bottom: 25px;
+      }
+
+      #research-topic {
+        height: 16px;
+      }
     </style>
   </head>
   <body>
@@ -68,18 +76,26 @@
       </div>
 
       <div class='span2'>
-        <h5>Legend</h5>
-        <ul>
-          <li>nodes: authors</li>
-          <li>lines: co-authorship</li>
-        </ul>
 
-        <br />
+        <section>
+          <h5>Research Topic</h5>
+          <input class='span2' id='research-topic' type="text" data-provide="typeahead">
+        </section>
 
-        <h5>Methods</h5>
-        <p>Papers are extracted via PubMed searches on certain keywords
-        and parsed for author information.  Scraper source code is available
-        <a href="https://github.com/yosemitebandit/crabnet">on GitHub</a>.</p>
+        <section>
+          <h5>Legend</h5>
+          <ul>
+            <li>nodes: authors</li>
+            <li>lines: co-authorship</li>
+          </ul>
+        </section>
+
+        <section>
+          <h5>Methods</h5>
+          <p>Papers are extracted via PubMed searches on certain keywords
+          and parsed for author information.  Scraper source code is available
+          <a href="https://github.com/yosemitebandit/crabnet">on GitHub</a>.</p>
+        </section>
 
       </div>
 
