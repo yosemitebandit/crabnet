@@ -28,11 +28,17 @@ paperInfo = []
 ## --------------------------------------
 ## get all PMIDs on initial disease query
 ## --------------------------------------
-disease = "skin+melanoma"
-#disease = "chordoma"
-#disease = "ultrasound+neuromodulation"
-#disease = "pancreatic+neuroendocrine"
-ret_max = 100
+#disease = "renal+cell+carcinoma" # common
+#disease = "myeloid+sarcoma" # rare
+disease = "pulmonary+blastoma"  # rare
+#disease = "pancreatoblastoma"  # rare
+#disease = "ocular+melanoma"  # rare
+#disease = "skin+melanoma" # common
+#disease = "chordoma"  # rare, but well-organized
+#disease = "ultrasound+neuromodulation" # Patrick's research
+#disease = "pancreatic+neuroendocrine"  # rare?
+print(disease)
+ret_max = 200000
 
 base_url = "http://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed"
 publication_list_url = "%s&term=%s&retmax=%s" % (base_url, disease, ret_max)
@@ -50,7 +56,6 @@ def get_dom(url):
     file.close()
     return parseString(data)
 
-
 def get_text(dom, tag_name, index=0):
     return dom.getElementsByTagName(tag_name)[index].toxml()
 
@@ -60,51 +65,93 @@ def extract_value(text, tag_name):
 
 #parse the xml you downloaded
 dom = get_dom(publication_list_url)
+count_text = get_text(dom, "Count")
+count = int(extract_value(count_text, "Count"))
+print count
 
-for i in range(ret_max):
-
+for i in range(count):
+    
+    if i % 100 == 0:
+        print i
+    
+    # source for more XML information: efetch instead of esummary
+    # http://lifeasclay.wordpress.com/2010/07/06/how-to-query-pubmed-and-retrieve-xml-results/
+    
     #retrieve the first xml tag (<tag>data</tag>) that the parser finds with name tagName:
     id_text = get_text(dom, "Id", i)
     publication_id = extract_value(id_text, "Id")
-    publication_url = "http://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=%s" % publication_id
+    
+    publication_url = "http://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&retmode=xml&id=%s" % publication_id
+
+    # publication_url = "http://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=%s" % publication_id
+    
     publication_dom = get_dom(publication_url)
+    
+    # extract features
+    if len(publication_dom.getElementsByTagName("Affiliation")) != 0:
+        affil_text = get_text(publication_dom, "Affiliation")
+        affiliation= extract_value(affil_text, "Affiliation")
+    
+    title_text = get_text(publication_dom, "ArticleTitle")
+    title = extract_value(title_text, "ArticleTitle")
+    
+    year_text = get_text(publication_dom, "Year")
+    year = extract_value(year_text, "Year")
 
-    item_list = publication_dom.getElementsByTagName('Item')
+    month_text = get_text(publication_dom, "Month")
+    month = extract_value(month_text, "Month")
 
+    day_text = get_text(publication_dom, "Day")
+    day = extract_value(day_text, "Day")
+    
+    pub_date = str(year) + '-' + str(month) + '-' + str(day)
+    
+    # get all authors
     authors = []
-    for s in item_list:
-        if s.attributes['Name'].value == 'Title':
-            title = s.childNodes[0].nodeValue
-            #print title
-        if s.attributes['Name'].value == 'PubDate':
-            pubDate = s.childNodes[0].nodeValue
-            #print pubDate
-        if s.attributes['Name'].value == 'Source':
-            journal = s.childNodes[0].nodeValue
-        if s.attributes['Name'].value == 'LastAuthor':
-            if len(s.childNodes) != 0:
-                lastAuthor = s.childNodes[0].nodeValue
-        if s.attributes['Name'].value == 'Author':
-            author = s.childNodes[0].nodeValue
-            #author.encode('ascii', 'ignore')
-            try:
-                author = str(author)
-                authors.append(author)
-            except ValueError:
-                pass
+    
+    def getText(nodelist):
+        rc = []
+        for node in nodelist:
+            if node.nodeType == node.TEXT_NODE:
+                rc.append(node.data)
+        return ''.join(rc)
+    
+    def handleAll(dom):
+        authors = dom.getElementsByTagName("Author")
+        handleAuthors(authors)
+
+    def handleAuthors(authors):
+        for author in authors:
+            handleAuthor(author)
+            
+    def handleAuthor(author):
+        if len(author.getElementsByTagName("LastName")) != 0:
+            lastNameOut = handleLastName(author.getElementsByTagName("LastName")[0])
+            foreNameOut = handleForeName(author.getElementsByTagName("ForeName")[0])
+            fullName = lastNameOut + ', ' + foreNameOut
+            authors.append(fullName)
+        
+    def handleLastName(lastName):
+        lastNameOut = getText(lastName.childNodes)
+        return lastNameOut
+
+    def handleForeName(foreName):
+        foreNameOut = getText(foreName.childNodes)
+        return foreNameOut
+        
+    handleAll(publication_dom)
+    
 
     ## -----------------------------------
     ## paper info to array for json output
     ## -----------------------------------
     
-
     this_paper_info = {
                 'PMIDs':publication_id,
                 'title':title,
-                'journal':journal,
-                'pub_date':pubDate
+                #'journal':journal,
+                'pub_date':pub_date
                 }
-        #print jsonAuth
     paperInfo.append(this_paper_info)
         
     ## -----------------------------
