@@ -41,6 +41,13 @@
         margin-top: 0;
       }
 
+      /* kludgy protection of the sample ad
+      */
+      h5, p {
+        text-decoration: none;
+        color: #445566;
+      }
+
     </style>
 
 
@@ -119,17 +126,27 @@
           to put clinical trial information in front of people who need to know.
           </p>
 
-          <div class='well span3'>
-            <h5>Chordoma Clinical Trial</h5>
-            <p>Opening May 5th, we are seeking males and females over 18.</p>
-            <p>Click to find out more.</p>
-            <span class='label pull-right label-info'>Duke University</span>
-          </div>
-
-          <div class='clearfix'>
-          </div>
+          <a href='#ad-modal' data-toggle='modal'>
+            <div class='well span3'>
+              <h5>Chordoma Clinical Trial</h5>
+              <p>Opening May 5th, we are seeking males and females over 18.</p>
+              <p>Click to find out more.</p>
+              <span class='label pull-right label-info'>Duke University</span>
+            </div>
+          </a>
 
         </section>
+
+        <div class='clearfix'></div>
+
+        <div class='modal hide fade' id='ad-modal' role='dialog'>
+          <div class='modal-body'>
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <p>For now, please contact your physician or visit
+            <a href='http://clinicaltrials.gov'>clinicaltrials.gov</a>.</p>
+          </div>
+          <div class='modal-footer'></div>
+        </div>
 
 
         <section id='researcher-network'>
@@ -156,6 +173,8 @@
 
     <script src="js/d3.v3.min.js"></script>
     <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap-modal.js"></script>
+    <script src="js/bootstrap-transition.js"></script>
     <script>
 
       var width = $('#network-graph').width();
