@@ -41,29 +41,28 @@
     <script type="text/javascript">
     $(document).ready(function(){
       $.getJSON('/papers.txt', function(response){
+        console.log(response);
         var w = 1280,
         h = 900,
         fill = d3.scale.category10(),
         nodes = d3.range(85).map(Object),
         links = d3.range(response.length).map(Object);
 
+        var hold_authors = [];
+
         var index = 0;
         var mouseX = 0,
-          mouseY = 0;
+            mouseY = 0;
 
 
-        for (var j = 0; j < response.length; j++){
+        for (var j = 0; j < response.authorPairs.length; j++){
          // console.log(j + ' author A ' + response[j].authorA + ' author B ' + response[j].authorB + ' value ' + response[j].paperCount);
-          links[j] = {source: nodes[response[j].authorA], target: nodes[response[j].authorB], value: response[j].paperCount};
-          if (nodes[response[j].authorA].author == response[j].authorA){
-            nodes[response[j].authorA].paperCount +=1;
-          }
-          else{
-            nodes[response[j].authorA].author = response[j].authorA;
-            nodes[response[j].authorA].paperCount =1;
-          }
+          links[j] = {source: nodes[response[j].authorPairs.authorA], target: nodes[response[j].authorPairs.authorB], value: response[j].authorPairs.paperCount};
         }
 
+       /* $.each(response.library2, function(entry,i){
+          author[i] = {name: entry.author, index: i, paperCount: papers.length, papers: papers };
+        })*/
 
       /*
       links.forEach(function(o,i){
@@ -212,8 +211,8 @@
           }
         });
 
-        d3.select('#more-info-box')
-          .html('Author' + nodes[index] + "<br/>Papers: " + nodes[index].paperCount);
+      //  d3.select('#more-info-box')
+      //    .html('Author' + authors[index].name + "<br/>Papers: " + authors[index].paperCount);
       }
 
       $('#clear-box').click(function(){
