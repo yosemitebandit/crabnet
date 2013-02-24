@@ -96,37 +96,37 @@ for i in range(ret_max):
         # "leading": 12,
         # "last author": 5,
         # "index": 8
-        
+
     ## -----------------------------
     ## hash authors for lookup table
     ## -----------------------------
-        
+
     len_authors = len(authors)
-    
+
     for i in range(len_authors):
         author = authors[i]
         author_hashed = hash(author)
         auth_dict.update({author:author_hashed})
-    
+
     # permutations to tally papers
     for j in range(len_authors-1):
-        
+
         author1 = authors[j]
         hash1 = auth_dict[author1]
         for k in range(j+1, len_authors):
             author2 = authors[k]
             hash2 = auth_dict[author2]
-            
+
             hashPair = [hash1, hash2]
             hashPair = hashPair.sort()
-            
+
             if hashPair not in list_hashPair:
                 list_hashPair.append(hashPair)
                 list_papers.append(int(publication_id))
-    
+
 print auth_dict
 print list_hashPair
-print list_papers    
+print list_papers
 
     ## --------------------------------
     ## write json file indexed by paper
