@@ -13,24 +13,21 @@
     <title>Target Accrual - Researcher Network</title>
 
     <style>
-      #hover-info {
+      #box-info {
         position: relative;
         height: auto;
         width:100%;
-        border-top: 1px solid black;
-        border-bottom: 1px solid black;
-        vertical-align:middle;
       }
       #container {
         padding-left:15%;
         padding-right:15%;
       }
       #more-info-box {
-        position:absolute;
-        background-color:white;
+        position: absolute;
         border: 1px solid;
-        height:50px;
-        width:200px;
+        height: auto;
+        width: 200px;
+        z-index: 12;
       }
 
       #header {
@@ -75,7 +72,6 @@
     <div class='row'>
       <div class='span10 contain-graphic'>
       </div>
-
       <div class='span2'>
 
         <section>
@@ -99,6 +95,10 @@
           <p>The scraper's source code is available
           <a href="https://github.com/yosemitebandit/crabnet">on GitHub</a>.
           </p>
+        </section>
+
+        <section>
+          <div id='box-info'></div>
         </section>
 
       </div>
@@ -147,9 +147,8 @@
       }).change();
 
 
-      $('#clear-box').click(function(){
-        $('#more-info-box').css('display', 'none');
-      });
+      //$('#clear-box').click(function(){
+      //});
     });
 
     function load_graph(dataset) {
@@ -157,6 +156,8 @@
       $.getJSON('../network-data/' + dataset, function(response){
         // data's loaded, clear out any old graphics
         $('.contain-graphic').html('');
+        $('.contain-graphic').html('<div id="more-info-box"></div>')
+        $('#more-info-box').css('display', 'none');
 
         // build a new graphic
         var w = $('.contain-graphic').width(),
@@ -267,8 +268,11 @@
 
         function more_info(d){
           $('#more-info-box').css('display', 'block');
+          console.log('x ' + mouseX + ' y ' + mouseY);
           $('#more-info-box').css('left', mouseX);
           $('#more-info-box').css('top', mouseY);
+
+          console.log('in here');
 
           var index = 0;
 
@@ -278,18 +282,22 @@
             }
           });
 
-          d3.select('#more-info-box')
-            .html('Author ' + hold_authors[index].name + "<br/>Papers: " + hold_authors[index].paperCount);
+          $('#more-info-box').html('Author ' + hold_authors[index].name + "<br/>Papers: " + hold_authors[index].paperCount);
 
-          d3.select("#hover-info")
-            .html('Author ' +  hold_authors[index].name + "<br/>Papers: " + hold_authors[index].paperCount + "<br/>PubMed papers:<br><ul></ul>"
+          d3.select("#box-info")
+            .html('<h5>Summary</h5>Author: ' +  hold_authors[index].name + "<br/>Papers: " + hold_authors[index].paperCount + "<br/>PubMed papers:<br><ul></ul>"
           );
 
           $.map(hold_authors[index].papers, function(d){
-            $('#hover-info ul').append('<li>'+d+'</li>');
+            $('#box-info ul').append('<li>'+d+'</li>');
           });
         }
 
+        $(document).mousemove(function(e){
+          mouseX = e.pageX;
+          mouseY = e.pageY;
+          //console.log('x ' + mouseX + ' y ' + mouseY);
+        })
       });
     }
   </script>
