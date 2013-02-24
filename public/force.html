@@ -44,17 +44,26 @@
         var w = 1280,
         h = 900,
         fill = d3.scale.category10(),
-        nodes = d3.range(response.length).map(Object),
+        nodes = d3.range(85).map(Object),
         links = d3.range(response.length).map(Object);
 
         var index = 0;
         var mouseX = 0,
           mouseY = 0;
 
+
         for (var j = 0; j < response.length; j++){
-          //console.log(j + ' author A ' + response[j].authorA + ' author B ' + response[j].authorB + ' value ' + response[j].paperCount);
+         // console.log(j + ' author A ' + response[j].authorA + ' author B ' + response[j].authorB + ' value ' + response[j].paperCount);
           links[j] = {source: nodes[response[j].authorA], target: nodes[response[j].authorB], value: response[j].paperCount};
+          if (nodes[response[j].authorA].author == response[j].authorA){
+            nodes[response[j].authorA].paperCount +=1;
+          }
+          else{
+            nodes[response[j].authorA].author = response[j].authorA;
+            nodes[response[j].authorA].paperCount =1;
+          }
         }
+
 
       /*
       links.forEach(function(o,i){
@@ -84,7 +93,6 @@
                     })
                     .attr('stroke','#999')
                     .attr('stroke-opacity', '0.6')
-                    .on('click', more_info)
 
       var node = vis.selectAll("circle.node")
           .data(nodes)
@@ -98,6 +106,7 @@
           .style("stroke-width", 1.5)
           .on("mouseover", hover)
           .on("mouseout", offhover)
+          .on('click', more_info);
 
       vis.style("opacity", 1e-6)
         .transition()
@@ -148,8 +157,6 @@
           }
         });
 
-        console.log(index);
-
         var num = Math.random()*40;
 
         d3.select("#hover-info")
@@ -163,7 +170,6 @@
 
         //alert(d==d);
 
-        console.log('---------------------')
 
        /* node
           .attr('fill', function(node_object){
@@ -194,8 +200,20 @@
         $('#more-info-box').css('left', mouseX);
         $('#more-info-box').css('top', mouseY);
 
+        var index = 0;
+
+        nodes.forEach(function(node,i){
+          //console.log('link ' + link.source.x + ' ' + link.source.y)
+          //console.log('link ' + link.source.x + ' ' + link.source.y)
+          //console.log('node ' + d.x + ' ' + d.y);console.log('node ' + d.x + ' ' + d.y);
+          if (node.x == d.x & node.y == d.y){
+            console.log(i);
+            index = i;
+          }
+        });
+
         d3.select('#more-info-box')
-          .html('Author' + 'Professor X' + "<br/>Papers: " + d.author);
+          .html('Author' + nodes[index] + "<br/>Papers: " + nodes[index].paperCount);
       }
 
       $('#clear-box').click(function(){
