@@ -14,17 +14,27 @@
           border-bottom: 1px solid black;
           vertical-align:middle;
         }
-        #container{
+        #container {
           padding-left:15%;
           padding-right:15%;
+        }
+        #more-info-box {
+          position:absolute;
+          background-color:red;
+          height:50px;
+          width:100px;
         }
       </style>
     </head>
     <body>
       <div id='container'>
-        <h2>Rare Cancer Research Network</h2>
+        <h2>GO TEAM!</h2>
         <div class='row'>
-          <div id="hover-info"></div>
+             <button id='clear-box'>Clear</button>
+          <div id="hover-info">
+         
+          </div>
+          <div id='more-info-box'></div>
         </div>
       </div>
     </body>
@@ -34,6 +44,9 @@
           fill = d3.scale.category10(),
           nodes = d3.range(100).map(Object),
           links = d3.range(100).map(Object);
+
+      var mouseX = 0,
+          mouseY = 0;
 
       links.forEach(function(o,i){
         o.source = nodes[(Math.round(Math.random()*99))];
@@ -52,6 +65,16 @@
           .start()
           .gravity('0.03')
 
+      var link = vis.selectAll('.link')
+                    .data(links)
+                  .enter().append('line')
+                    .attr('class','link')
+                    .style('stroke-width',function(d){
+                      return Math.sqrt(d.value);
+                    })
+                    .attr('stroke','#999')
+                    .attr('stroke-opacity', '0.6')
+
       var node = vis.selectAll("circle.node")
           .data(nodes)
         .enter().append("svg:circle")
@@ -64,15 +87,7 @@
           .style("stroke-width", 1.5)
           .on("mouseover", hover)
           .on("mouseout", offhover)
-
-      var link = vis.selectAll('.link')
-                    .data(links)
-                  .enter().append('line')
-                    .attr('class','link')
-                    .style('stroke-width',function(d){
-                      return Math.sqrt(d.value);
-                    })
-                    .attr('stroke','black')
+          .on('click', more_info)
 
       vis.style("opacity", 1e-6)
         .transition()
@@ -96,7 +111,7 @@
             .attr("cy", function(d) { return (d.y); });
       });
 
-      d3.select("body").on("click", function() {
+      /*d3.select("body").on("click", function() {
         nodes.forEach(function(o, i) {
           o.x += (Math.random() - .5) * 40;
           o.y += (Math.random() - .5) * 40;
@@ -110,13 +125,14 @@
         });
 
         force.resume();
-      });
+      });*/
 
       function hover(d) {
         var index = [];
         links.forEach(function(link,i){
-          console.log('link ' + link.source.x + ' ' + link.source.y)
-          console.log('node ' + d.x + ' ' + d.y);
+          //console.log('link ' + link.source.x + ' ' + link.source.y)
+          //console.log('link ' + link.source.x + ' ' + link.source.y)
+          //console.log('node ' + d.x + ' ' + d.y);console.log('node ' + d.x + ' ' + d.y);
           if ((link.source.x == d.x & link.source.y == d.y) | (link.target.x == d.x & link.target.y == d.y)){
             index.push(i);
           }
@@ -131,13 +147,54 @@
 
         link.attr('stroke', function(d, i){
           if (index.indexOf(i) > -1) {
-            return 'yellow';
+            return 'green';
           }
-        })  
+        }) 
+
+        //alert(d==d);
+
+        console.log('---------------------')
+
+       /* node
+          .attr('fill', function(node_object){
+            index.forEach(function(real_index,i){
+              console.log(real_index);
+              console.log('link ' + links[real_index].source.x + ' ' + links[real_index].source.y)
+              console.log('node ' + node_object.x + ' ' + node_object.y);
+              if ((links[real_index].source.x == node_object.x & links[real_index].source.y == node_object.y) | 
+                  (links[real_index].target.x == node_object.x & links[real_index].target.y == node_object.y)){
+                alert('here');
+                return 'red';
+              }
+            })
+            return null; 
+          })*/
+
       };
 
       function offhover(d){
-          link.attr('stroke', 'black')
+          link.attr('stroke', '#999')
+          node
+            .attr('opacity', function(d){
+                return 1; })
       }
+
+      function more_info(d){
+        $('#more-info-box').css('display', 'block');
+        $('#more-info-box').css('left', mouseX);
+        $('#more-info-box').css('top', mouseY);
+
+        d3.select('#more-info-box')
+          .html('Author' + 'Professor X' + "<br/>Papers: " + d.x);
+      }
+
+      $('#clear-box').click(function(){
+        $('#more-info-box').css('display', 'none');
+      })
+
+      $(document).mousemove(function(e){
+        mouseX = e.pageX;
+        mouseY = e.pageY;
+      })
    </script>
  </html>
