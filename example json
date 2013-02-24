@@ -1,0 +1,23 @@
+// Example researcher.json
+
+{
+    "firstname": "Patrick",
+    "lastname": "Ye",
+    "institution": "Stanford University",
+    "papers": [12,58,3,12],
+    "index": 1
+}
+
+/// Example paper JSON
+
+{   
+    "title":"Chordoma genetic sequencing",
+    "year": 2004,
+    "month": 3,
+    "authors": [12,8,2,5],
+    "URL": 34545,
+    "disease": "Chordoma",
+    "leading": 12,
+    "last author": 5,
+    "index": 8
+}

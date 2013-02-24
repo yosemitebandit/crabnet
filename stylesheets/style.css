@@ -1,0 +1,31 @@
+.chart {
+   font: 10px sans-serif;
+   background-color: white;
+   text-align: right;
+   padding: 3px;
+   margin: 1px;
+   color: white;
+}
+
+.chart rect	{
+	stroke: white;
+	fill: steelblue;
+}
+
+.energy-data {
+   font: 10px sans-serif;
+   color: white;
+   background-color: white;
+   text-align: right;
+   padding: 3px;
+   margin: 1px;
+}
+
+.candy-data {
+   font: 10px courier;
+   color: white;
+   background-color: white;
+   text-align: right;
+   padding: 3px;
+   margin: 1px;
+}
