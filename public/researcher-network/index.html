@@ -107,7 +107,35 @@
   <script type="text/javascript" src="../js/d3.v3.min.js"></script>
 
     <script type="text/javascript">
-    $(document).ready(function(){
+      var topics = {
+        "chordoma": 'chordoma.txt'
+          , "ocular melanoma": 'ocular+melanoma.txt'
+          , "polycythemia vera": 'polycythemia+vera.txt'
+          , "skin melanoma": 'skin melanoma.txt'
+      }
+
+      $(function() {
+        // prepopulate topic input
+        $('#research-topic').val('chordoma');
+
+        // wait for input to change
+        $('#research-topic').change(function() {
+          // get topic input
+          var selection = $('#research-topic').val();
+
+          if (selection in topics) {
+            // load json
+            console.log('whoa');
+            load_graph(topics[selection]);
+
+          } else {
+            console.log('nerp');
+          }
+
+
+        }).change();
+
+
       $.getJSON('../network-data/chordoma.txt', function(response){
         var w = $('.contain-graphic').width(),
         h = $(window).height()-50,
@@ -305,6 +333,7 @@
         mouseX = e.pageX;
         mouseY = e.pageY;
       })
-            })});
+      })
+      });
    </script>
  </html>
