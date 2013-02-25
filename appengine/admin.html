@@ -1,0 +1,59 @@
+<html>
+  <head>
+     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+     <script type="text/javascript">
+      $("button")
+     </script>
+  </head>
+  <body>
+    <h1>Admin Console</h1>
+
+    <h2>Import publications</h2>
+
+    <form action="/import" method="post">
+      <div>Disease: <input type="text" name="disease_slug"></div>
+      <div>Query: <input type="text" name="query"></div>
+      <div><input type="submit" value="Import!"></div>
+    </form>
+
+    <h2>Delete all publications</h2>
+
+    <form action="/reset" method="post">
+      {% for slug in disease_counts %}
+      <div>
+        <span>{{ slug }}</span>
+        <span><input type="checkbox" name="disease_slug" value="{{ slug }}"></span>
+      </div>
+      {% endfor %}
+      <div><input type="submit" value="Delete"></div>
+    </form>
+
+    <h2>Show all authors</h2>
+    {% for author in authors %}
+      <div>{{ author.name }}</div>
+    {% endfor %}
+
+    <h2>Show all publications</h2>
+    <table>
+    {% for pub in pubs %}
+      <tr>
+        <td>
+          {% for name in pub.author_names %}
+          {{ name }}
+          {% endfor %}
+        </td>
+        <td>{{ pub.pubmed_id }}</td>
+        <td>{{ pub.title }}</td>
+        <td>
+          {% for disease in pub.diseases %}
+          {{ disease }}
+          {% endfor %}
+        </td>
+        <td>{{ pub.date_added }}</td>
+        <td>{{ pub.date_published }}</td>
+      </tr>
+    {% endfor %}
+    </table>
+
+  </body>
+</html>

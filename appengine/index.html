@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="author" content="Will, Stephanie, Hillary, Fokale, Patrick, Jas, Matt" />
+    <meta name="keywords" content="clinical trials, participants, registration" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="icon" type="image/gif" href="favicon.gif" />
+    <link href="../css/bootstrap.css" rel="stylesheet">
+    <link href="../css/bootstrap-responsive.css" rel="stylesheet">
+
+    <title>Target Accrual - Researcher Network</title>
+
+    <style>
+      #hover-info {
+        position: relative;
+        height: auto;
+        width:100%;
+        border-top: 1px solid black;
+        border-bottom: 1px solid black;
+        vertical-align:middle;
+      }
+      #container {
+        padding-left:15%;
+        padding-right:15%;
+      }
+      #more-info-box {
+        position:absolute;
+        background-color:white;
+        border: 1px solid;
+        height:50px;
+        width:200px;
+      }
+
+      #header {
+        margin-left: 10px;
+      }
+
+      section {
+        margin-bottom: 25px;
+      }
+
+      #research-topic {
+        height: 16px;
+        margin: 0 auto;
+      }
+    </style>
+  </head>
+  <body>
+    <!--
+    <div id='container'>
+      <h2>Do not wait to strike till the iron is hot; but make it hot by striking.</h2>
+      <div class='row'>
+        <button id='clear-box'>Clear</button>         
+      </div>
+      <div class='row contain-graphic'>
+        <div id='more-info-box'></div>
+      </div>
+      <div id="hover-info">
+      </div>
+
+    </div>
+    -->
+
+
+    <div class='row'>
+      <div class='span12'>
+        <h4 id='header'><a href="/">Target Accrual</a>
+          <small>researcher network</small>
+        </h4>
+      </div>
+    </div>
+
+    <div class='row'>
+      <div class='span10 contain-graphic'>
+      </div>
+
+      <div class='span2'>
+
+        <section>
+          <h5>Research Topic</h5>
+          <input class='span2' id='research-topic' type="text" data-provide="typeahead">
+        </section>
+
+        <section>
+          <h5>Legend</h5>
+          <ul>
+            <li>nodes: authors</li>
+            <li>lines: co-authorship</li>
+          </ul>
+        </section>
+
+        <section>
+          <h5>Methods</h5>
+          <p>Papers are extracted via PubMed searches on certain keywords
+          and parsed for author information.  The scraper's source code is available
+          <a href="https://github.com/yosemitebandit/crabnet">on GitHub</a>.</p>
+        </section>
+
+      </div>
+
+    </div>
+
+  </body>
+
+  <script src="../js/jquery.min.js"></script>
+  <script src="../js/bootstrap-typeahead.js"></script>
+  <script src="../js/d3.v3.min.js"></script>
+  <script src="../js/network.js"></script>
+
+</html>
