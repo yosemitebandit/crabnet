@@ -22,6 +22,7 @@ list_hash = []
 list_hashPair = []
 list_papersAuth = []
 list_papersPair = []
+list_affiliation = [] # affiliation provided for first author only
 paperInfo = []
 
 
@@ -159,22 +160,26 @@ for i in range(count):
     ## -----------------------------
 
     len_authors = len(authors)
-
+    
+    # big list of all authors
     for i in range(len_authors):
         author = authors[i]
         if author not in list_auth:
             list_auth.append(author)
             list_papersAuth.append([])
+            list_affiliation.append([])
+    
     # for i in range(len_authors):
         # author = authors[i]
         # author_hashed = hash(author)
         # auth_dict.update({author:author_hashed})
     
-    
     # tally papers by single author
     for g in range(len_authors):
         list_author_idx = list_auth.index(authors[g])
         list_papersAuth[list_author_idx].append(int(publication_id))    
+        if g == 0:
+            list_affiliation[list_author_idx].append(affiliation)
     
     # permutations to tally papers by pairs of authors
     for j in range(len_authors-1):
@@ -226,7 +231,8 @@ for h in range(len_authors):
     jsonAuth = {
             'author_id':h,
             'author_name':list_auth[h],
-            'papers':list_papersAuth[h]
+            'papers':list_papersAuth[h],
+            'affiliation':list_affiliation[h]
             }
     #print jsonAuth
     authorsOnly.append(jsonAuth)
