@@ -17,6 +17,10 @@
         position: relative;
         height: auto;
         width:100%;
+        border-top: 1px solid white;
+        border-bottom: 1px solid white;
+        padding-left:1%;
+        display: none;
       }
       #container {
         padding-left:15%;
@@ -97,10 +101,6 @@
           </p>
         </section>
 
-        <section>
-          <div id='box-info'></div>
-        </section>
-
       </div>
 
     </div>
@@ -120,6 +120,8 @@
       , "myeloid sarcoma": 'myeloid+sarcoma.txt'
       , "pancreatoblastoma": 'pancreatoblastoma.txt'
     }
+
+    var box_diff = 0;
 
     // grab the topics for typeahead provision
     var topic_keys = [];
@@ -157,7 +159,10 @@
         // data's loaded, clear out any old graphics
         $('.contain-graphic').html('');
         $('.contain-graphic').html('<div id="more-info-box"></div>')
+        $('.contain-graphic').append('<div id="box-info"></div>')
         $('#more-info-box').css('display', 'none');
+
+        console.log(response);
 
         // build a new graphic
         var w = $('.contain-graphic').width(),
@@ -212,7 +217,7 @@
           .attr("cx", function(d) { return d.x; })
           .attr("cy", function(d) { return d.y; })
           .attr("r", function(d,i){
-            return hold_authors[i].paperCount;
+            return 1.5*hold_authors[i].paperCount;
           })
           .attr('opacity', .6)
           .style("fill", function(d, i) { return 'red'; })
@@ -267,7 +272,13 @@
         }
 
         function more_info(d){
+          var box_posX = mouseX,
+              box_posY = mouseY;
+
+          var hold_diff = 0;
+
           $('#more-info-box').css('display', 'block');
+          $('#box-info').css('display', 'block');
           console.log('x ' + mouseX + ' y ' + mouseY);
           $('#more-info-box').css('left', mouseX);
           $('#more-info-box').css('top', mouseY);
@@ -288,9 +299,32 @@
             .html('<h5>Summary</h5>Author: ' +  hold_authors[index].name + "<br/>Papers: " + hold_authors[index].paperCount + "<br/>PubMed papers:<br><ul></ul>"
           );
 
-          $.map(hold_authors[index].papers, function(d){
-            $('#box-info ul').append('<li>'+d+'</li>');
+          var title_hold = response.paperInfo;
+          var title_trans = [];
+
+
+          $.each(hold_authors[index].papers, function(i, d){
+            $.each(response.paperInfo, function(i, title){
+              if (title.PMIDs==d){
+                title_trans.push(title.title);
+              }
+            })
+          })
+
+          $.map(title_trans, function(d,i){
+              $('#box-info ul').append('<li><a href="http://www.ncbi.nlm.nih.gov/pubmed/'+hold_authors[index].papers[i]+'">'+d+'</a></li>');
           });
+
+          if (box_diff==0){
+            $('#more-info-box').css('top', box_posY + $('#box-info').height());
+            box_diff = $('#box-info').height();
+          }
+          else {
+            hold_diff = $('#box-info').height() - box_diff;
+            console.log(hold_diff);
+            $('#more-info-box').css('top', box_posY + hold_diff);
+            box_diff = $('#box-info').height();
+          }
         }
 
         $(document).mousemove(function(e){
